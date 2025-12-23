@@ -26,7 +26,13 @@ doklah/
 
 ## Getting Started
 
-### 1. Development
+### 1. Live Demo
+
+**📱 [Try Doklah on GitHub Pages](https://fernando7jr.github.io/doklah/)**
+
+The PWA is fully functional online. Once you visit, you can install it as an app and use it completely offline.
+
+### 2. Development
 
 Serve locally with any HTTP server:
 
@@ -43,28 +49,29 @@ ruby -run -ehttpd . -p8000
 
 Visit `http://localhost:8000/doklah/` in your browser.
 
-### 2. Add Your Data
+### 3. GitHub Pages Setup
 
-Place JSON files in the `data/` folder:
+GitHub Pages is already enabled for this repository!
 
-```json
-{
-  "title": "My Data",
-  "items": [...]
-}
-```
+To set up GitHub Pages for your own fork:
 
-Load them in `app.js`:
+1. **Push to your GitHub repository**
+   ```bash
+   git push origin main
+   ```
 
-```javascript
-const myData = await loadData("myfile.json");
-```
+2. **Enable GitHub Pages in repository settings:**
+   - Go to your repository on GitHub
+   - Settings → Pages
+   - Source: main branch
+   - Click Save
 
-### 3. Deploy to GitHub Pages
+3. **Your PWA will be live at:**
+   ```
+   https://yourusername.github.io/doklah/
+   ```
 
-1. Push to your GitHub repository
-2. Enable GitHub Pages in repository settings (main branch)
-3. Your PWA will be live at `https://yourusername.github.io/doklah/`
+The `.nojekyll` file in the root directory tells GitHub Pages to serve files as-is, without Jekyll processing, which is required for PWA Service Workers to work correctly.
 
 ## Installation on Devices
 
