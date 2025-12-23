@@ -216,7 +216,7 @@
                     </div>
                     <div class="modal-body">
                         <!-- Chart Toggle -->
-                        <div class="btn-group w-100 mb-4" role="group">
+                        <div class="btn-group w-100 mb-4" role="group" id="chartTypeGroup">
                             <input type="radio" class="btn-check" name="chartType" id="weightChart" value="weight" checked>
                             <label class="btn btn-outline-primary" for="weightChart" data-i18n="chart.weight">
                                 ⚖️ Weight by Age
@@ -225,6 +225,11 @@
                             <input type="radio" class="btn-check" name="chartType" id="heightChart" value="height">
                             <label class="btn btn-outline-primary" for="heightChart" data-i18n="chart.height">
                                 📏 Height by Age
+                            </label>
+                            
+                            <input type="radio" class="btn-check" name="chartType" id="bmiChart" value="bmi">
+                            <label class="btn btn-outline-primary" for="bmiChart" data-i18n="chart.bmi">
+                                📊 BMI by Age
                             </label>
                         </div>
 
@@ -244,7 +249,7 @@
         </div>
 
         <footer class="text-center py-3 mt-auto border-top">
-            <small class="text-muted" data-i18n="footer.version">Doklah v1.0 | Offline-First Pediatric Assessment</small>
+            <small class="text-muted" data-i18n="footer.version">Doklah v1.1 | Offline-First Pediatric Assessment</small>
         </footer>
     </div>
 

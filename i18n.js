@@ -101,6 +101,10 @@ async function changeLanguage(lang) {
     settings.language = lang;
     saveSettings(settings);
     renderUI();
+    // Repopulate age select with translated labels
+    if (typeof populateAgeSelect === "function") {
+      populateAgeSelect();
+    }
   }
 }
 

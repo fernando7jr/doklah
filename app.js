@@ -116,6 +116,16 @@ async function initApp() {
         );
       }
     });
+
+    document.getElementById("bmiChart").addEventListener("change", () => {
+      if (currentPatientData) {
+        renderGrowthChart(
+          "bmi",
+          currentPatientData.gender,
+          currentPatientData
+        );
+      }
+    });
   } catch (error) {
     console.error("Error initializing app:", error);
     showError("Failed to initialize application: " + error.message);
@@ -129,6 +139,9 @@ async function initApp() {
  */
 function populateAgeSelect() {
   const ages = getUniqueAges();
+
+  // Clear existing options except the first one
+  ageSelect.innerHTML = '<option value="">Select age</option>';
 
   ages.forEach((ageObj) => {
     const option = document.createElement("option");
@@ -353,21 +366,50 @@ function handleBackButton() {
 
 /**
  * Handle chart button click - open chart modal and render growth chart
- * Renders weight chart by default and allows user to toggle between weight/height
+ * For adolescents, shows BMI chart only. For infants/children, shows weight/height options.
  * @returns {void}
  */
 function handleChartButton() {
   if (!currentPatientData) return;
 
-  // Reset to weight chart
-  document.getElementById("weightChart").checked = true;
+  // Determine growth stage
+  const growthStage = determineGrowthStage(currentPatientData.age, currentPatientData.ageUnit);
+  const weightChart = document.getElementById("weightChart");
+  const heightChart = document.getElementById("heightChart");
+  const bmiChart = document.getElementById("bmiChart");
+
+  // Get label elements (next siblings of the input elements)
+  const weightLabel = weightChart.nextElementSibling;
+  const heightLabel = heightChart.nextElementSibling;
+  const bmiLabel = bmiChart.nextElementSibling;
+
+  if (growthStage === "adolescent") {
+    // Show only BMI for adolescents
+    weightChart.style.display = "none";
+    weightLabel.style.display = "none";
+    heightChart.style.display = "none";
+    heightLabel.style.display = "none";
+    bmiChart.style.display = "inline-block";
+    bmiLabel.style.display = "inline-block";
+    bmiChart.checked = true;
+  } else {
+    // Show weight and height for infants/children
+    weightChart.style.display = "inline-block";
+    weightLabel.style.display = "inline-block";
+    heightChart.style.display = "inline-block";
+    heightLabel.style.display = "inline-block";
+    bmiChart.style.display = "none";
+    bmiLabel.style.display = "none";
+    weightChart.checked = true;
+  }
 
   // Show modal
   chartModal.show();
 
-  // Render initial weight chart
+  // Render initial chart
   setTimeout(() => {
-    renderGrowthChart("weight", currentPatientData.gender, currentPatientData);
+    const metric = growthStage === "adolescent" ? "bmi" : "weight";
+    renderGrowthChart(metric, currentPatientData.gender, currentPatientData);
   }, 100);
 }
 

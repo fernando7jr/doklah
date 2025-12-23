@@ -19,7 +19,14 @@
         "heightOptional": "Optional - leave blank if unknown",
         "age": "Age",
         "ageRequired": "Required field",
-        "submit": "Calculate Expected Values"
+        "submit": "Calculate Expected Values",
+        "ages": {
+            "newborn": "Newborn",
+            "month": "{{value}} month",
+            "months": "{{value}} months",
+            "year": "{{value}} year",
+            "years": "{{value}} years"
+        }
     },
     "errors": {
         "title": "Error",
@@ -56,6 +63,7 @@
         "title": "Growth Chart",
         "weight": "⚖️ Weight by Age",
         "height": "📏 Height by Age",
+        "bmi": "📊 BMI by Age",
         "growthCurve": "Growth curve",
         "patient": "Patient",
         "age": "Age",

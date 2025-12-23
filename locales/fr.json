@@ -19,7 +19,14 @@
         "heightOptional": "Optionnel - laisser vide si inconnu",
         "age": "Âge",
         "ageRequired": "Champ obligatoire",
-        "submit": "Calculer les Valeurs Attendues"
+        "submit": "Calculer les Valeurs Attendues",
+        "ages": {
+            "newborn": "Nouveau-Né",
+            "month": "{{value}} mois",
+            "months": "{{value}} mois",
+            "year": "{{value}} an",
+            "years": "{{value}} ans"
+        }
     },
     "errors": {
         "title": "Erreur",
@@ -56,6 +63,7 @@
         "title": "Graphique de Croissance",
         "weight": "⚖️ Poids par Âge",
         "height": "📏 Taille par Âge",
+        "bmi": "📊 IMC par Âge",
         "growthCurve": "Courbe de croissance",
         "patient": "Patient",
         "age": "Âge",

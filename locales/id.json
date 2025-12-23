@@ -19,7 +19,14 @@
         "heightOptional": "Opsional - biarkan kosong jika tidak diketahui",
         "age": "Usia",
         "ageRequired": "Bidang wajib",
-        "submit": "Hitung Nilai yang Diharapkan"
+        "submit": "Hitung Nilai yang Diharapkan",
+        "ages": {
+            "newborn": "Bayi Baru Lahir",
+            "month": "{{value}} bulan",
+            "months": "{{value}} bulan",
+            "year": "{{value}} tahun",
+            "years": "{{value}} tahun"
+        }
     },
     "errors": {
         "title": "Kesalahan",
@@ -45,7 +52,9 @@
         "closenessExcellent": "Luar Biasa",
         "closenessVeryGood": "Sangat Baik",
         "closenessGood": "Baik",
-        "closenesssFair": "Cukup"
+        "closenesssFair": "Cukup",
+        "closenessPoor": "Kurang",
+        "closenessVeryPoor": "Sangat Kurang"
     },
     "buttons": {
         "back": "← Kembali",
@@ -56,6 +65,7 @@
         "title": "Grafik Pertumbuhan",
         "weight": "⚖️ Berat menurut Usia",
         "height": "📏 Tinggi menurut Usia",
+        "bmi": "📊 BMI menurut Usia",
         "growthCurve": "Kurva pertumbuhan",
         "patient": "Pasien",
         "age": "Usia",

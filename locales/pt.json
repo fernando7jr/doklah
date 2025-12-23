@@ -19,7 +19,14 @@
         "heightOptional": "Opcional - deixe em branco se desconhecido",
         "age": "Idade",
         "ageRequired": "Campo obrigatório",
-        "submit": "Calcular Valores Esperados"
+        "submit": "Calcular Valores Esperados",
+        "ages": {
+            "newborn": "Recém-Nascido",
+            "month": "{{value}} mês",
+            "months": "{{value}} meses",
+            "year": "{{value}} ano",
+            "years": "{{value}} anos"
+        }
     },
     "errors": {
         "title": "Erro",
@@ -56,6 +63,7 @@
         "title": "Gráfico de Crescimento",
         "weight": "⚖️ Peso por Idade",
         "height": "📏 Altura por Idade",
+        "bmi": "📊 IMC por Idade",
         "growthCurve": "Curva de crescimento",
         "patient": "Paciente",
         "age": "Idade",

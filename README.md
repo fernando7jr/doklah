@@ -56,11 +56,13 @@ GitHub Pages is already enabled for this repository!
 To set up GitHub Pages for your own fork:
 
 1. **Push to your GitHub repository**
+
    ```bash
    git push origin main
    ```
 
 2. **Enable GitHub Pages in repository settings:**
+
    - Go to your repository on GitHub
    - Settings → Pages
    - Source: main branch
