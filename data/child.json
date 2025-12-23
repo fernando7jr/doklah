@@ -210,6 +210,42 @@
     },
     {
       "ageType": "INFANT",
+      "age": 13,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 9.8,
+      "height": 76.8,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 13,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 9.1,
+      "height": 75.2,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 14,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 10.1,
+      "height": 78.0,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 14,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 9.4,
+      "height": 76.3,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
       "age": 15,
       "ageUnit": "MONTH",
       "gender": "BOY",
@@ -223,6 +259,42 @@
       "gender": "GIRL",
       "weight": 9.6,
       "height": 77.5
+    },
+    {
+      "ageType": "INFANT",
+      "age": 16,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 10.5,
+      "height": 80.2,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 16,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 9.8,
+      "height": 78.6,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 17,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 10.7,
+      "height": 81.2,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 17,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 10.0,
+      "height": 79.6,
+      "interpolated": true
     },
     {
       "ageType": "INFANT",
@@ -242,6 +314,42 @@
     },
     {
       "ageType": "INFANT",
+      "age": 19,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 11.1,
+      "height": 83.2,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 19,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 10.4,
+      "height": 81.7,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 20,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 11.3,
+      "height": 84.2,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 20,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 10.7,
+      "height": 82.7,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
       "age": 21,
       "ageUnit": "MONTH",
       "gender": "BOY",
@@ -255,6 +363,42 @@
       "gender": "GIRL",
       "weight": 10.9,
       "height": 83.7
+    },
+    {
+      "ageType": "INFANT",
+      "age": 22,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 11.7,
+      "height": 85.8,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 22,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 11.1,
+      "height": 84.6,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 23,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 12.0,
+      "height": 86.4,
+      "interpolated": true
+    },
+    {
+      "ageType": "INFANT",
+      "age": 23,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 11.3,
+      "height": 85.5,
+      "interpolated": true
     },
     {
       "ageType": "CHILD",
