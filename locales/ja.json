@@ -1,0 +1,75 @@
+{
+    "header": {
+        "title": "Doklah",
+        "subtitle": "小児成長評価"
+    },
+    "footer": {
+        "version": "Doklah v1.0 | オフライン小児評価"
+    },
+    "form": {
+        "title": "患者評価",
+        "gender": "性別",
+        "genderBoy": "👦 男の子",
+        "genderGirl": "👧 女の子",
+        "weight": "体重 (kg)",
+        "weightPlaceholder": "例: 15.5",
+        "weightRequired": "必須項目",
+        "height": "身長 (cm)",
+        "heightPlaceholder": "例: 75.5",
+        "heightOptional": "オプション - 不明な場合は空白のままにしてください",
+        "age": "年齢",
+        "ageRequired": "必須項目",
+        "submit": "期待値を計算"
+    },
+    "errors": {
+        "title": "エラー",
+        "genderRequired": "性別は必須です",
+        "weightRequired": "体重は必須です",
+        "weightInvalid": "体重は0.01〜150kgの間である必要があります",
+        "heightInvalid": "身長は0.01〜220cmの間である必要があります",
+        "ageRequired": "年齢は必須です"
+    },
+    "results": {
+        "title": "評価結果",
+        "matchQuality": "一致品質",
+        "metric": "指標",
+        "inputData": "入力データ",
+        "forYourAge": "あなたの年齢の場合",
+        "closestMatch": "最も近い一致",
+        "gender": "性別",
+        "weight": "体重 (kg)",
+        "height": "身長 (cm)",
+        "age": "年齢",
+        "growthStage": "成長段階",
+        "notProvided": "未提供",
+        "closenessExcellent": "優れている",
+        "closenessVeryGood": "非常に良い",
+        "closenessGood": "良い",
+        "closenesssFair": "まあまあ"
+    },
+    "buttons": {
+        "back": "← 戻る",
+        "chart": "📊 成長曲線を表示",
+        "settings": "⚙️ 設定"
+    },
+    "chart": {
+        "title": "成長曲線",
+        "weight": "⚖️ 年齢別体重",
+        "height": "📏 年齢別身長",
+        "growthCurve": "成長曲線",
+        "patient": "患者",
+        "age": "年齢",
+        "noData": "利用可能なデータなし"
+    },
+    "settings": {
+        "title": "設定",
+        "language": "言語",
+        "darkMode": "ダークモード",
+        "save": "保存",
+        "close": "閉じる"
+    },
+    "emptyState": {
+        "title": "まだ評価がありません",
+        "message": "フォームに入力して「期待値を計算」をクリックして結果を表示してください"
+    }
+}

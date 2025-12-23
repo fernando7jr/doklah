@@ -1,0 +1,75 @@
+{
+    "header": {
+        "title": "Doklah",
+        "subtitle": "Pediatric Growth Assessment"
+    },
+    "footer": {
+        "version": "Doklah v1.0 | Offline-First Pediatric Assessment"
+    },
+    "form": {
+        "title": "Patient Assessment",
+        "gender": "Gender",
+        "genderBoy": "👦 Boy",
+        "genderGirl": "👧 Girl",
+        "weight": "Weight (kg)",
+        "weightPlaceholder": "e.g., 15.5",
+        "weightRequired": "Required field",
+        "height": "Height (cm)",
+        "heightPlaceholder": "e.g., 75.5",
+        "heightOptional": "Optional - leave blank if unknown",
+        "age": "Age",
+        "ageRequired": "Required field",
+        "submit": "Calculate Expected Values"
+    },
+    "errors": {
+        "title": "Error",
+        "genderRequired": "Gender is required",
+        "weightRequired": "Weight is required",
+        "weightInvalid": "Weight must be between 0.01 and 150 kg",
+        "heightInvalid": "Height must be between 0.01 and 220 cm",
+        "ageRequired": "Age is required"
+    },
+    "results": {
+        "title": "Assessment Results",
+        "matchQuality": "Match Quality",
+        "metric": "Metric",
+        "inputData": "Input Data",
+        "forYourAge": "For Your Age",
+        "closestMatch": "Closest Match",
+        "gender": "Gender",
+        "weight": "Weight (kg)",
+        "height": "Height (cm)",
+        "age": "Age",
+        "growthStage": "Growth Stage",
+        "notProvided": "Not provided",
+        "closenessExcellent": "Excellent",
+        "closenessVeryGood": "Very Good",
+        "closenessGood": "Good",
+        "closenesssFair": "Fair"
+    },
+    "buttons": {
+        "back": "← Back",
+        "chart": "📊 View Growth Chart",
+        "settings": "⚙️ Settings"
+    },
+    "chart": {
+        "title": "Growth Chart",
+        "weight": "⚖️ Weight by Age",
+        "height": "📏 Height by Age",
+        "growthCurve": "Growth curve",
+        "patient": "Patient",
+        "age": "Age",
+        "noData": "No data available"
+    },
+    "settings": {
+        "title": "Settings",
+        "language": "Language",
+        "darkMode": "Dark Mode",
+        "save": "Save",
+        "close": "Close"
+    },
+    "emptyState": {
+        "title": "No Assessment Yet",
+        "message": "Fill in the form and click \"Calculate Expected Values\" to see results"
+    }
+}

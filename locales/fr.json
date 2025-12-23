@@ -1,0 +1,75 @@
+{
+    "header": {
+        "title": "Doklah",
+        "subtitle": "Évaluation de la Croissance Pédiatrique"
+    },
+    "footer": {
+        "version": "Doklah v1.0 | Évaluation Pédiatrique Hors Ligne"
+    },
+    "form": {
+        "title": "Évaluation du Patient",
+        "gender": "Genre",
+        "genderBoy": "👦 Garçon",
+        "genderGirl": "👧 Fille",
+        "weight": "Poids (kg)",
+        "weightPlaceholder": "p.ex., 15.5",
+        "weightRequired": "Champ obligatoire",
+        "height": "Taille (cm)",
+        "heightPlaceholder": "p.ex., 75.5",
+        "heightOptional": "Optionnel - laisser vide si inconnu",
+        "age": "Âge",
+        "ageRequired": "Champ obligatoire",
+        "submit": "Calculer les Valeurs Attendues"
+    },
+    "errors": {
+        "title": "Erreur",
+        "genderRequired": "Le genre est obligatoire",
+        "weightRequired": "Le poids est obligatoire",
+        "weightInvalid": "Le poids doit être entre 0.01 et 150 kg",
+        "heightInvalid": "La taille doit être entre 0.01 et 220 cm",
+        "ageRequired": "L'âge est obligatoire"
+    },
+    "results": {
+        "title": "Résultats de l'Évaluation",
+        "matchQuality": "Qualité de Correspondance",
+        "metric": "Métrique",
+        "inputData": "Données Saisies",
+        "forYourAge": "Pour Votre Âge",
+        "closestMatch": "Correspondance la Plus Proche",
+        "gender": "Genre",
+        "weight": "Poids (kg)",
+        "height": "Taille (cm)",
+        "age": "Âge",
+        "growthStage": "Stade de Croissance",
+        "notProvided": "Non fourni",
+        "closenessExcellent": "Excellent",
+        "closenessVeryGood": "Très Bon",
+        "closenessGood": "Bon",
+        "closenesssFair": "Acceptable"
+    },
+    "buttons": {
+        "back": "← Retour",
+        "chart": "📊 Voir le Graphique de Croissance",
+        "settings": "⚙️ Paramètres"
+    },
+    "chart": {
+        "title": "Graphique de Croissance",
+        "weight": "⚖️ Poids par Âge",
+        "height": "📏 Taille par Âge",
+        "growthCurve": "Courbe de croissance",
+        "patient": "Patient",
+        "age": "Âge",
+        "noData": "Aucune donnée disponible"
+    },
+    "settings": {
+        "title": "Paramètres",
+        "language": "Langue",
+        "darkMode": "Mode Sombre",
+        "save": "Enregistrer",
+        "close": "Fermer"
+    },
+    "emptyState": {
+        "title": "Pas d'Évaluation Encore",
+        "message": "Remplissez le formulaire et cliquez sur \"Calculer les Valeurs Attendues\" pour voir les résultats"
+    }
+}

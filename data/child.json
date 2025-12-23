@@ -1,0 +1,548 @@
+{
+  "data": [
+    {
+      "ageType": "INFANT",
+      "age": 0,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 3.3,
+      "height": 49.9
+    },
+    {
+      "ageType": "INFANT",
+      "age": 0,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 3.2,
+      "height": 49.1
+    },
+    {
+      "ageType": "INFANT",
+      "age": 1,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 4.5,
+      "height": 54.7
+    },
+    {
+      "ageType": "INFANT",
+      "age": 1,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 4.2,
+      "height": 53.7
+    },
+    {
+      "ageType": "INFANT",
+      "age": 2,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 5.6,
+      "height": 58.4
+    },
+    {
+      "ageType": "INFANT",
+      "age": 2,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 5.1,
+      "height": 57.1
+    },
+    {
+      "ageType": "INFANT",
+      "age": 3,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 6.4,
+      "height": 61.4
+    },
+    {
+      "ageType": "INFANT",
+      "age": 3,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 5.8,
+      "height": 59.8
+    },
+    {
+      "ageType": "INFANT",
+      "age": 4,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 7.0,
+      "height": 63.9
+    },
+    {
+      "ageType": "INFANT",
+      "age": 4,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 6.4,
+      "height": 62.1
+    },
+    {
+      "ageType": "INFANT",
+      "age": 5,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 7.5,
+      "height": 65.9
+    },
+    {
+      "ageType": "INFANT",
+      "age": 5,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 6.9,
+      "height": 64.0
+    },
+    {
+      "ageType": "INFANT",
+      "age": 6,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 7.9,
+      "height": 67.6
+    },
+    {
+      "ageType": "INFANT",
+      "age": 6,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 7.3,
+      "height": 65.7
+    },
+    {
+      "ageType": "INFANT",
+      "age": 7,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 8.3,
+      "height": 69.2
+    },
+    {
+      "ageType": "INFANT",
+      "age": 7,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 7.6,
+      "height": 67.3
+    },
+    {
+      "ageType": "INFANT",
+      "age": 8,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 8.6,
+      "height": 70.6
+    },
+    {
+      "ageType": "INFANT",
+      "age": 8,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 7.9,
+      "height": 68.7
+    },
+    {
+      "ageType": "INFANT",
+      "age": 9,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 8.9,
+      "height": 72.0
+    },
+    {
+      "ageType": "INFANT",
+      "age": 9,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 8.2,
+      "height": 70.1
+    },
+    {
+      "ageType": "INFANT",
+      "age": 10,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 9.2,
+      "height": 73.3
+    },
+    {
+      "ageType": "INFANT",
+      "age": 10,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 8.5,
+      "height": 71.5
+    },
+    {
+      "ageType": "INFANT",
+      "age": 11,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 9.4,
+      "height": 74.5
+    },
+    {
+      "ageType": "INFANT",
+      "age": 11,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 8.7,
+      "height": 72.8
+    },
+    {
+      "ageType": "INFANT",
+      "age": 12,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 9.6,
+      "height": 75.7
+    },
+    {
+      "ageType": "INFANT",
+      "age": 12,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 8.9,
+      "height": 74.0
+    },
+    {
+      "ageType": "INFANT",
+      "age": 15,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 10.3,
+      "height": 79.1
+    },
+    {
+      "ageType": "INFANT",
+      "age": 15,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 9.6,
+      "height": 77.5
+    },
+    {
+      "ageType": "INFANT",
+      "age": 18,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 10.9,
+      "height": 82.3
+    },
+    {
+      "ageType": "INFANT",
+      "age": 18,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 10.2,
+      "height": 80.7
+    },
+    {
+      "ageType": "INFANT",
+      "age": 21,
+      "ageUnit": "MONTH",
+      "gender": "BOY",
+      "weight": 11.5,
+      "height": 85.1
+    },
+    {
+      "ageType": "INFANT",
+      "age": 21,
+      "ageUnit": "MONTH",
+      "gender": "GIRL",
+      "weight": 10.9,
+      "height": 83.7
+    },
+    {
+      "ageType": "CHILD",
+      "age": 2,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 12.2,
+      "height": 87.1
+    },
+    {
+      "ageType": "CHILD",
+      "age": 2,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 11.5,
+      "height": 86.4
+    },
+    {
+      "ageType": "CHILD",
+      "age": 3,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 14.3,
+      "height": 96.1
+    },
+    {
+      "ageType": "CHILD",
+      "age": 3,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 13.9,
+      "height": 95.1
+    },
+    {
+      "ageType": "CHILD",
+      "age": 4,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 16.3,
+      "height": 103.3
+    },
+    {
+      "ageType": "CHILD",
+      "age": 4,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 16.1,
+      "height": 102.7
+    },
+    {
+      "ageType": "CHILD",
+      "age": 5,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 18.3,
+      "height": 110.0
+    },
+    {
+      "ageType": "CHILD",
+      "age": 5,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 18.2,
+      "height": 109.4
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 6,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 20.5,
+      "height": 116.0
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 6,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 20.2,
+      "height": 115.1
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 7,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 22.9,
+      "height": 121.7
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 7,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 22.4,
+      "height": 120.8
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 8,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 25.6,
+      "height": 127.3
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 8,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 25.0,
+      "height": 126.4
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 9,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 28.6,
+      "height": 132.6
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 9,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 28.1,
+      "height": 132.2
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 10,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 32.0,
+      "height": 137.8
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 10,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 31.9,
+      "height": 138.4
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 11,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 35.9,
+      "height": 143.1
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 11,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 36.4,
+      "height": 144.8
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 12,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 40.5,
+      "height": 149.1
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 12,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 41.5,
+      "height": 151.2
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 13,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 45.8,
+      "height": 156.0
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 13,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 46.5,
+      "height": 156.4
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 14,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 51.3,
+      "height": 163.2
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 14,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 50.8,
+      "height": 159.8
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 15,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 56.7,
+      "height": 169.0
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 15,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 54.1,
+      "height": 161.7
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 16,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 61.3,
+      "height": 172.9
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 16,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 56.3,
+      "height": 162.5
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 17,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 64.6,
+      "height": 175.2
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 17,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 57.8,
+      "height": 162.9
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 18,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 66.9,
+      "height": 176.1
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 18,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 58.9,
+      "height": 163.1
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 19,
+      "ageUnit": "YEAR",
+      "gender": "BOY",
+      "weight": 68.3,
+      "height": 176.5
+    },
+    {
+      "ageType": "ADOLESCENT",
+      "age": 19,
+      "ageUnit": "YEAR",
+      "gender": "GIRL",
+      "weight": 59.8,
+      "height": 163.2
+    }
+  ]
+}

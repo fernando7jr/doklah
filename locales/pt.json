@@ -1,0 +1,75 @@
+{
+    "header": {
+        "title": "Doklah",
+        "subtitle": "Avaliação do Crescimento Pediátrico"
+    },
+    "footer": {
+        "version": "Doklah v1.0 | Avaliação Pediátrica Offline-First"
+    },
+    "form": {
+        "title": "Avaliação do Paciente",
+        "gender": "Gênero",
+        "genderBoy": "👦 Menino",
+        "genderGirl": "👧 Menina",
+        "weight": "Peso (kg)",
+        "weightPlaceholder": "ex., 15.5",
+        "weightRequired": "Campo obrigatório",
+        "height": "Altura (cm)",
+        "heightPlaceholder": "ex., 75.5",
+        "heightOptional": "Opcional - deixe em branco se desconhecido",
+        "age": "Idade",
+        "ageRequired": "Campo obrigatório",
+        "submit": "Calcular Valores Esperados"
+    },
+    "errors": {
+        "title": "Erro",
+        "genderRequired": "Gênero é obrigatório",
+        "weightRequired": "Peso é obrigatório",
+        "weightInvalid": "Peso deve estar entre 0.01 e 150 kg",
+        "heightInvalid": "Altura deve estar entre 0.01 e 220 cm",
+        "ageRequired": "Idade é obrigatória"
+    },
+    "results": {
+        "title": "Resultados da Avaliação",
+        "matchQuality": "Qualidade de Correspondência",
+        "metric": "Métrica",
+        "inputData": "Dados Inseridos",
+        "forYourAge": "Para Sua Idade",
+        "closestMatch": "Correspondência Mais Próxima",
+        "gender": "Gênero",
+        "weight": "Peso (kg)",
+        "height": "Altura (cm)",
+        "age": "Idade",
+        "growthStage": "Estágio de Crescimento",
+        "notProvided": "Não fornecido",
+        "closenessExcellent": "Excelente",
+        "closenessVeryGood": "Muito Bom",
+        "closenessGood": "Bom",
+        "closenesssFair": "Aceitável"
+    },
+    "buttons": {
+        "back": "← Voltar",
+        "chart": "📊 Ver Gráfico de Crescimento",
+        "settings": "⚙️ Configurações"
+    },
+    "chart": {
+        "title": "Gráfico de Crescimento",
+        "weight": "⚖️ Peso por Idade",
+        "height": "📏 Altura por Idade",
+        "growthCurve": "Curva de crescimento",
+        "patient": "Paciente",
+        "age": "Idade",
+        "noData": "Sem dados disponíveis"
+    },
+    "settings": {
+        "title": "Configurações",
+        "language": "Idioma",
+        "darkMode": "Modo Escuro",
+        "save": "Salvar",
+        "close": "Fechar"
+    },
+    "emptyState": {
+        "title": "Sem Avaliação Ainda",
+        "message": "Preencha o formulário e clique em \"Calcular Valores Esperados\" para ver os resultados"
+    }
+}

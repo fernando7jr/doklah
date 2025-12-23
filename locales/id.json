@@ -1,0 +1,75 @@
+{
+    "header": {
+        "title": "Doklah",
+        "subtitle": "Penilaian Pertumbuhan Anak"
+    },
+    "footer": {
+        "version": "Doklah v1.0 | Penilaian Anak Offline-First"
+    },
+    "form": {
+        "title": "Penilaian Pasien",
+        "gender": "Jenis Kelamin",
+        "genderBoy": "👦 Laki-laki",
+        "genderGirl": "👧 Perempuan",
+        "weight": "Berat (kg)",
+        "weightPlaceholder": "mis., 15.5",
+        "weightRequired": "Bidang wajib",
+        "height": "Tinggi (cm)",
+        "heightPlaceholder": "mis., 75.5",
+        "heightOptional": "Opsional - biarkan kosong jika tidak diketahui",
+        "age": "Usia",
+        "ageRequired": "Bidang wajib",
+        "submit": "Hitung Nilai yang Diharapkan"
+    },
+    "errors": {
+        "title": "Kesalahan",
+        "genderRequired": "Jenis kelamin wajib diisi",
+        "weightRequired": "Berat wajib diisi",
+        "weightInvalid": "Berat harus antara 0.01 dan 150 kg",
+        "heightInvalid": "Tinggi harus antara 0.01 dan 220 cm",
+        "ageRequired": "Usia wajib diisi"
+    },
+    "results": {
+        "title": "Hasil Penilaian",
+        "matchQuality": "Kualitas Kecocokan",
+        "metric": "Metrik",
+        "inputData": "Data Pasien",
+        "forYourAge": "Pertumbuhan Sesuai Umur",
+        "closestMatch": "Pertumbuhan Sesuai Kategori Usia",
+        "gender": "Jenis Kelamin",
+        "weight": "Berat (kg)",
+        "height": "Tinggi (cm)",
+        "age": "Usia",
+        "growthStage": "Tahap Pertumbuhan",
+        "notProvided": "Tidak disediakan",
+        "closenessExcellent": "Luar Biasa",
+        "closenessVeryGood": "Sangat Baik",
+        "closenessGood": "Baik",
+        "closenesssFair": "Cukup"
+    },
+    "buttons": {
+        "back": "← Kembali",
+        "chart": "📊 Lihat Grafik Pertumbuhan",
+        "settings": "⚙️ Pengaturan"
+    },
+    "chart": {
+        "title": "Grafik Pertumbuhan",
+        "weight": "⚖️ Berat menurut Usia",
+        "height": "📏 Tinggi menurut Usia",
+        "growthCurve": "Kurva pertumbuhan",
+        "patient": "Pasien",
+        "age": "Usia",
+        "noData": "Tidak ada data yang tersedia"
+    },
+    "settings": {
+        "title": "Pengaturan",
+        "language": "Bahasa",
+        "darkMode": "Mode Gelap",
+        "save": "Simpan",
+        "close": "Tutup"
+    },
+    "emptyState": {
+        "title": "Belum Ada Penilaian",
+        "message": "Isi formulir dan klik \"Hitung Nilai yang Diharapkan\" untuk melihat hasilnya"
+    }
+}
