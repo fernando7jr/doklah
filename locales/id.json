@@ -4,7 +4,7 @@
         "subtitle": "Penilaian Pertumbuhan Anak"
     },
     "footer": {
-        "version": "Doklah v1.0 | Penilaian Anak Offline-First"
+        "version": "Doklah v1.1 | Penilaian Anak Offline-First"
     },
     "form": {
         "title": "Penilaian Pasien",
@@ -19,7 +19,14 @@
         "heightOptional": "Opsional - biarkan kosong jika tidak diketahui",
         "age": "Usia",
         "ageRequired": "Bidang wajib",
-        "submit": "Hitung Nilai yang Diharapkan"
+        "submit": "Hitung Nilai yang Diharapkan",
+        "ages": {
+            "newborn": "Bayi Baru Lahir",
+            "month": "{{value}} bulan",
+            "months": "{{value}} bulan",
+            "year": "{{value}} tahun",
+            "years": "{{value}} tahun"
+        }
     },
     "errors": {
         "title": "Kesalahan",
@@ -39,13 +46,32 @@
         "gender": "Jenis Kelamin",
         "weight": "Berat (kg)",
         "height": "Tinggi (cm)",
+        "bmi": "BMI (kg/m²)",
         "age": "Usia",
         "growthStage": "Tahap Pertumbuhan",
         "notProvided": "Tidak disediakan",
-        "closenessExcellent": "Luar Biasa",
-        "closenessVeryGood": "Sangat Baik",
-        "closenessGood": "Baik",
-        "closenesssFair": "Cukup"
+        "closenessExcellent": "Gizi Sangat Baik",
+        "closenessVeryGood": "Gizi Sangat Baik",
+        "closenessGood": "Gizi Baik",
+        "closenesssFair": "Gizi Cukup",
+        "closenessBad": "Gizi Kurang",
+        "closenessVeryBad": "Gizi Sangat Kurang",
+        "matchQualityPercentage": "kualitas gizi",
+        "weightSeverelyUnderweight": "BB Sangat Kurus",
+        "weightUnderweight": "BB Kurus",
+        "weightNormal": "BB Normal",
+        "weightOverweight": "BB Berlebih",
+        "weightSeverelyOverweight": "Obesitas",
+        "heightSeverelyShort": "Sangat Pendek",
+        "heightShort": "Pendek",
+        "heightNormal": "Tinggi Normal",
+        "heightTall": "Tinggi",
+        "heightSeverelyTall": "Sangat Tinggi",
+        "bmiSeverelyUnderweight": "BB Sangat Kurus",
+        "bmiUnderweight": "BB Kurus",
+        "bmiNormal": "BB Normal",
+        "bmiOverweight": "BB Berlebih",
+        "bmiSeverelyOverweight": "Obesitas"
     },
     "buttons": {
         "back": "← Kembali",
@@ -56,6 +82,7 @@
         "title": "Grafik Pertumbuhan",
         "weight": "⚖️ Berat menurut Usia",
         "height": "📏 Tinggi menurut Usia",
+        "bmi": "📊 BMI menurut Usia",
         "growthCurve": "Kurva pertumbuhan",
         "patient": "Pasien",
         "age": "Usia",

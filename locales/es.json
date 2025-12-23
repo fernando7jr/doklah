@@ -4,7 +4,7 @@
         "subtitle": "Evaluación del Crecimiento Pediátrico"
     },
     "footer": {
-        "version": "Doklah v1.0 | Evaluación Pediátrica sin Conexión"
+        "version": "Doklah v1.1 | Evaluación Pediátrica sin Conexión"
     },
     "form": {
         "title": "Evaluación del Paciente",
@@ -19,7 +19,14 @@
         "heightOptional": "Opcional - dejar en blanco si no se conoce",
         "age": "Edad",
         "ageRequired": "Campo requerido",
-        "submit": "Calcular Valores Esperados"
+        "submit": "Calcular Valores Esperados",
+        "ages": {
+            "newborn": "Recién Nacido",
+            "month": "{{value}} mes",
+            "months": "{{value}} meses",
+            "year": "{{value}} año",
+            "years": "{{value}} años"
+        }
     },
     "errors": {
         "title": "Error",
@@ -39,13 +46,32 @@
         "gender": "Género",
         "weight": "Peso (kg)",
         "height": "Altura (cm)",
+        "bmi": "IMC (kg/m²)",
         "age": "Edad",
         "growthStage": "Etapa de Crecimiento",
         "notProvided": "No proporcionado",
         "closenessExcellent": "Excelente",
         "closenessVeryGood": "Muy Bueno",
         "closenessGood": "Bueno",
-        "closenesssFair": "Aceptable"
+        "closenesssFair": "Aceptable",
+        "closenessBad": "Malo",
+        "closenessVeryBad": "Muy Malo",
+        "matchQualityPercentage": "calidad de coincidencia",
+        "weightSeverelyUnderweight": "Severamente Bajo de Peso",
+        "weightUnderweight": "Bajo de Peso",
+        "weightNormal": "Peso Normal",
+        "weightOverweight": "Sobrepeso",
+        "weightSeverelyOverweight": "Severamente Sobrepeso",
+        "heightSeverelyShort": "Severamente Bajo",
+        "heightShort": "Bajo",
+        "heightNormal": "Altura Normal",
+        "heightTall": "Alto",
+        "heightSeverelyTall": "Severamente Alto",
+        "bmiSeverelyUnderweight": "Severamente Bajo de Peso",
+        "bmiUnderweight": "Bajo de Peso",
+        "bmiNormal": "Peso Normal",
+        "bmiOverweight": "Sobrepeso",
+        "bmiSeverelyOverweight": "Severamente Sobrepeso"
     },
     "buttons": {
         "back": "← Atrás",
@@ -56,6 +82,7 @@
         "title": "Gráfico de Crecimiento",
         "weight": "⚖️ Peso por Edad",
         "height": "📏 Altura por Edad",
+        "bmi": "📊 IMC por Edad",
         "growthCurve": "Curva de crecimiento",
         "patient": "Paciente",
         "age": "Edad",

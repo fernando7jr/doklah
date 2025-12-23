@@ -13,6 +13,7 @@ const urlsToCache = [
   "/doklah/manifest.json",
   "/doklah/sw.js",
   "/doklah/data/child.json",
+  "/doklah/data/z-score.json",
   // Icons - cache for offline PWA display
   "/doklah/icon/favicon-16x16.png",
   "/doklah/icon/favicon-32x32.png",

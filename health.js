@@ -3,6 +3,7 @@
  */
 
 let childData = null;
+let zScoreData = null;
 
 /**
  * Load WHO pediatric growth reference data from JSON file
@@ -76,7 +77,7 @@ function convertToMonths(age, unit) {
 }
 
 /**
- * Format age for human-readable display
+ * Format age for human-readable display using i18n translations
  * @param {number} age - Age value
  * @param {string} unit - Age unit ('MONTH' or 'YEAR')
  * @returns {string} Formatted age string
@@ -87,9 +88,16 @@ function convertToMonths(age, unit) {
  */
 function formatAge(age, unit) {
   if (unit === "MONTH") {
-    return age === 0 ? "Newborn" : `${age} month${age !== 1 ? "s" : ""}`;
+    if (age === 0) {
+      return t("form.ages.newborn");
+    }
+    const key = age === 1 ? "form.ages.month" : "form.ages.months";
+    const template = t(key);
+    return template.replace("{{value}}", age);
   }
-  return `${age} year${age !== 1 ? "s" : ""}`;
+  const key = age === 1 ? "form.ages.year" : "form.ages.years";
+  const template = t(key);
+  return template.replace("{{value}}", age);
 }
 
 /**
@@ -476,4 +484,257 @@ function getChartDataForGender(gender) {
 
   // Sort by age in the nornalized unit
   return filtered.sort((a, b) => a.normalizedAge - b.normalizedAge);
+}
+
+/**
+ * Load WHO Z-score reference data from JSON file
+ * Contains z-score curves for infant, child, and adolescent growth stages
+ * @async
+ * @returns {Promise<Object>} Z-score data object with infant, child, adolescent, strategy keys
+ * @throws {Error} If data fails to load
+ */
+async function loadZScoreData() {
+  if (zScoreData) return zScoreData;
+
+  try {
+    const response = await fetch("data/z-score.json");
+    if (!response.ok) {
+      throw new Error(`Failed to load z-score data: ${response.status}`);
+    }
+    zScoreData = await response.json();
+    return zScoreData;
+  } catch (error) {
+    console.error("Error loading z-score data:", error);
+    throw error;
+  }
+}
+
+/**
+ * Determine growth stage based on patient age
+ * @param {number} age - Patient age value
+ * @param {string} ageUnit - Age unit ('MONTH' or 'YEAR')
+ * @returns {string} Growth stage: 'infant' (0-23m), 'child' (2-9y), or 'adolescent' (10-19y)
+ */
+function determineGrowthStage(age, ageUnit) {
+  const ageMonths = convertToMonths(age, ageUnit);
+
+  if (ageMonths < 24) return "infant";
+  const ageYears = ageMonths / 12;
+  if (ageYears < 10) return "child";
+  return "adolescent";
+}
+
+/**
+ * Calculate BMI from weight and height
+ * @param {number} weight - Weight in kg
+ * @param {number} height - Height in cm
+ * @returns {number} BMI value
+ */
+function calculateBMI(weight, height) {
+  const heightMeters = height / 100;
+  return weight / (heightMeters * heightMeters);
+}
+
+/**
+ * Get median height for a specific age, gender, and growth stage
+ * Used for adolescent BMI calculations when height is not provided
+ * @param {string} gender - Patient gender ('BOY' or 'GIRL')
+ * @param {number} age - Patient age value
+ * @param {string} ageUnit - Age unit ('MONTH' or 'YEAR')
+ * @returns {number|null} Median height in cm, or null if not found
+ */
+function getMedianHeightForAge(gender, age, ageUnit) {
+  if (!zScoreData || !zScoreData.adolescent || !zScoreData.adolescent[0]) {
+    return null;
+  }
+
+  const adolescentData = zScoreData.adolescent[0];
+  const ageYears = ageUnit === "MONTH" ? age / 12 : age;
+
+  const entry = adolescentData.find(
+    (record) => record.age === Math.round(ageYears) && record.gender === gender
+  );
+
+  return entry ? entry.medianHeight : null;
+}
+
+/**
+ * Get Z-score curves for a patient
+ * Returns data points for all 5 curves: -2, -1, 0 (median), +1, +2
+ * @param {string} gender - Patient gender ('BOY' or 'GIRL')
+ * @param {number} age - Patient age value
+ * @param {string} ageUnit - Age unit ('MONTH' or 'YEAR')
+ * @param {string} metric - Metric type: 'weight', 'height', or 'bmi'
+ * @returns {Object} Object with keys -2, -1, 0, 1, 2 containing curve data arrays
+ * @example
+ * const curves = getZScoreCurves('BOY', 6, 'MONTH', 'weight');
+ * // Returns { "-2": {...}, "-1": {...}, "0": {...}, "1": {...}, "2": {...} }
+ */
+function getZScoreCurves(gender, age, ageUnit, metric) {
+  if (!zScoreData) return {};
+
+  const growthStage = determineGrowthStage(age, ageUnit);
+  const strategy = zScoreData.strategy[growthStage];
+
+  if (!strategy) return {};
+
+  let dataSource = zScoreData[growthStage];
+
+  // Adolescents use different structure
+  if (growthStage === "adolescent" && Array.isArray(dataSource)) {
+    dataSource = dataSource[0];
+  }
+
+  const ageValue = ageUnit === "MONTH" ? age : Math.round(age);
+
+  // Find the z-score entry for this age and gender
+  const zScoreEntry = dataSource.find((record) => {
+    const recordAge = ageUnit === "MONTH" ? record.age : record.age;
+    return recordAge === ageValue && record.gender === gender;
+  });
+
+  if (!zScoreEntry) return {};
+
+  // Determine which z-score property to use based on metric and growth stage
+  let zScoreProp = null;
+  if (growthStage === "adolescent") {
+    zScoreProp = "bmiZ";
+  } else if (metric === "weight") {
+    zScoreProp = "weightZ";
+  } else if (metric === "height") {
+    zScoreProp = "heightZ";
+  }
+
+  if (!zScoreProp || !zScoreEntry[zScoreProp]) return {};
+
+  // Extract z-score values for all 5 curves
+  const zValues = zScoreEntry[zScoreProp];
+  return {
+    "-2": zValues["-2"],
+    "-1": zValues["-1"],
+    0: zValues["0"],
+    1: zValues["1"],
+    2: zValues["2"],
+  };
+}
+
+/**
+ * Interpolate z-score from patient measurements
+ * Calculates where a patient's measurement falls on the z-score scale
+ * Z-score = (measurement - median) / (SD1 - median) for positive side
+ * Z-score = (measurement - median) / (median - SD1) for negative side
+ * @param {string} gender - Patient gender ('BOY' or 'GIRL')
+ * @param {number} age - Patient age value
+ * @param {string} ageUnit - Age unit ('MONTH' or 'YEAR')
+ * @param {string} metric - Metric type: 'weight', 'height', or 'bmi'
+ * @param {number} value - Patient measurement value
+ * @returns {number|null} Interpolated z-score, or null if data unavailable
+ */
+function interpolateZScore(gender, age, ageUnit, metric, value) {
+  const zScores = getZScoreCurves(gender, age, ageUnit, metric);
+
+  if (!zScores || Object.keys(zScores).length === 0) return null;
+
+  const median = zScores[0]; // z=0 is the median
+
+  if (value === median) return 0;
+
+  if (value > median) {
+    // Above median: interpolate between z=0 and z=2
+    const sd1 = zScores[1]; // z=1 (1 SD above median)
+    const sd2 = zScores[2]; // z=2 (2 SDs above median)
+
+    if (value <= sd1) {
+      // Between median and +1 SD
+      return ((value - median) / (sd1 - median)) * 1;
+    } else {
+      // Between +1 and +2 SD
+      return 1 + ((value - sd1) / (sd2 - sd1)) * 1;
+    }
+  } else {
+    // Below median: interpolate between z=0 and z=-2
+    const sdMinus1 = zScores[-1]; // z=-1 (1 SD below median)
+    const sdMinus2 = zScores[-2]; // z=-2 (2 SDs below median)
+
+    if (value >= sdMinus1) {
+      // Between -1 SD and median
+      return ((value - median) / (sdMinus1 - median)) * -1;
+    } else {
+      // Between -2 and -1 SD
+      return -1 + ((value - sdMinus1) / (sdMinus2 - sdMinus1)) * -1;
+    }
+  }
+}
+
+/**
+ * Classify z-score into growth category
+ * @param {number} zScore - The z-score value
+ * @returns {Object} Classification object with keys: category, label, thresholds
+ */
+function classifyZScore(zScore) {
+  if (zScore > 2) {
+    return { category: "veryBad", z: zScore, range: "> +2 SD" };
+  } else if (zScore > 1) {
+    return { category: "bad", z: zScore, range: "+1 to +2 SD" };
+  } else if (zScore > -1) {
+    return { category: "fair", z: zScore, range: "-1 to +1 SD" };
+  } else if (zScore > -2) {
+    return { category: "good", z: zScore, range: "-2 to -1 SD" };
+  } else if (zScore >= -2) {
+    return { category: "veryGood", z: zScore, range: "-2 SD" };
+  } else {
+    return { category: "excellent", z: zScore, range: "< -2 SD" };
+  }
+}
+
+/**
+ * Calculate percentage closeness to median (z=0)
+ * 100% at z=0 (median), decreases with distance from median
+ * Formula: 100 / (1 + |z-score|)
+ * @param {number} zScore - The z-score value
+ * @returns {number} Percentage from 0-100 (always positive)
+ */
+function calculatePercentageFromZScore(zScore) {
+  return Math.round(100 / (1 + Math.abs(zScore)));
+}
+
+/**
+ * Get translated label for z-score classification
+ * Maps z-scores to weight/height/bmi classification keys for translation
+ * @param {string} type - Type: 'weight', 'height', or 'bmi'
+ * @param {number} zScore - The z-score value
+ * @returns {string} Translated label text
+ */
+function getZScoreLabel(type, zScore) {
+  let key = "";
+
+  if (zScore > 1) {
+    key = `${type}SeverelyOverweight`;
+  } else if (zScore > 0.5) {
+    key = `${type}Overweight`;
+  } else if (zScore >= -0.5) {
+    key = `${type}Normal`;
+  } else if (zScore >= -1) {
+    key = `${type}Underweight`;
+  } else {
+    key = `${type}SeverelyUnderweight`;
+  }
+
+  return t(`results.${key}`);
+}
+
+/**
+ * Get badge color class for z-score classification
+ * Returns Bootstrap badge color class based on z-score severity
+ * @param {number} zScore - The z-score value
+ * @returns {string} Bootstrap color class: 'bg-danger', 'bg-warning', 'bg-success'
+ */
+function getZScoreBadgeColor(zScore) {
+  if (zScore > 1 || zScore < -1) {
+    return "bg-danger"; // Severely over/underweight - red
+  } else if (zScore > 0.5 || zScore < -0.5) {
+    return "bg-warning"; // Overweight/underweight - yellow
+  } else {
+    return "bg-success"; // Normal - green
+  }
 }

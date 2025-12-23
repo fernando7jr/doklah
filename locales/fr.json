@@ -4,7 +4,7 @@
         "subtitle": "Évaluation de la Croissance Pédiatrique"
     },
     "footer": {
-        "version": "Doklah v1.0 | Évaluation Pédiatrique Hors Ligne"
+        "version": "Doklah v1.1 | Évaluation Pédiatrique Hors Ligne"
     },
     "form": {
         "title": "Évaluation du Patient",
@@ -19,7 +19,14 @@
         "heightOptional": "Optionnel - laisser vide si inconnu",
         "age": "Âge",
         "ageRequired": "Champ obligatoire",
-        "submit": "Calculer les Valeurs Attendues"
+        "submit": "Calculer les Valeurs Attendues",
+        "ages": {
+            "newborn": "Nouveau-Né",
+            "month": "{{value}} mois",
+            "months": "{{value}} mois",
+            "year": "{{value}} an",
+            "years": "{{value}} ans"
+        }
     },
     "errors": {
         "title": "Erreur",
@@ -39,13 +46,32 @@
         "gender": "Genre",
         "weight": "Poids (kg)",
         "height": "Taille (cm)",
+        "bmi": "IMC (kg/m²)",
         "age": "Âge",
         "growthStage": "Stade de Croissance",
         "notProvided": "Non fourni",
         "closenessExcellent": "Excellent",
         "closenessVeryGood": "Très Bon",
         "closenessGood": "Bon",
-        "closenesssFair": "Acceptable"
+        "closenesssFair": "Acceptable",
+        "closenessBad": "Mauvais",
+        "closenessVeryBad": "Très Mauvais",
+        "matchQualityPercentage": "qualité de correspondance",
+        "weightSeverelyUnderweight": "Insuffisance Pondérale Grave",
+        "weightUnderweight": "Insuffisance Pondérale",
+        "weightNormal": "Poids Normal",
+        "weightOverweight": "Surpoids",
+        "weightSeverelyOverweight": "Surpoids Grave",
+        "heightSeverelyShort": "Petite Taille Grave",
+        "heightShort": "Petite Taille",
+        "heightNormal": "Taille Normale",
+        "heightTall": "Grande Taille",
+        "heightSeverelyTall": "Grande Taille Grave",
+        "bmiSeverelyUnderweight": "Insuffisance Pondérale Grave",
+        "bmiUnderweight": "Insuffisance Pondérale",
+        "bmiNormal": "Poids Normal",
+        "bmiOverweight": "Surpoids",
+        "bmiSeverelyOverweight": "Surpoids Grave"
     },
     "buttons": {
         "back": "← Retour",
@@ -56,6 +82,7 @@
         "title": "Graphique de Croissance",
         "weight": "⚖️ Poids par Âge",
         "height": "📏 Taille par Âge",
+        "bmi": "📊 IMC par Âge",
         "growthCurve": "Courbe de croissance",
         "patient": "Patient",
         "age": "Âge",

@@ -4,7 +4,7 @@
         "subtitle": "Pediatric Growth Assessment"
     },
     "footer": {
-        "version": "Doklah v1.0 | Offline-First Pediatric Assessment"
+        "version": "Doklah v1.1 | Offline-First Pediatric Assessment"
     },
     "form": {
         "title": "Patient Assessment",
@@ -19,7 +19,14 @@
         "heightOptional": "Optional - leave blank if unknown",
         "age": "Age",
         "ageRequired": "Required field",
-        "submit": "Calculate Expected Values"
+        "submit": "Calculate Expected Values",
+        "ages": {
+            "newborn": "Newborn",
+            "month": "{{value}} month",
+            "months": "{{value}} months",
+            "year": "{{value}} year",
+            "years": "{{value}} years"
+        }
     },
     "errors": {
         "title": "Error",
@@ -39,13 +46,32 @@
         "gender": "Gender",
         "weight": "Weight (kg)",
         "height": "Height (cm)",
+        "bmi": "BMI (kg/m²)",
         "age": "Age",
         "growthStage": "Growth Stage",
         "notProvided": "Not provided",
         "closenessExcellent": "Excellent",
         "closenessVeryGood": "Very Good",
         "closenessGood": "Good",
-        "closenesssFair": "Fair"
+        "closenesssFair": "Fair",
+        "closenessBad": "Bad",
+        "closenessVeryBad": "Very Bad",
+        "matchQualityPercentage": "match quality",
+        "weightSeverelyUnderweight": "Severely Underweight",
+        "weightUnderweight": "Underweight",
+        "weightNormal": "Normal",
+        "weightOverweight": "Overweight",
+        "weightSeverelyOverweight": "Severely Overweight",
+        "heightSeverelyShort": "Severely Short",
+        "heightShort": "Short",
+        "heightNormal": "Normal Height",
+        "heightTall": "Tall",
+        "heightSeverelyTall": "Severely Tall",
+        "bmiSeverelyUnderweight": "Severely Underweight",
+        "bmiUnderweight": "Underweight",
+        "bmiNormal": "Normal Weight",
+        "bmiOverweight": "Overweight",
+        "bmiSeverelyOverweight": "Severely Overweight"
     },
     "buttons": {
         "back": "← Back",
@@ -56,6 +82,7 @@
         "title": "Growth Chart",
         "weight": "⚖️ Weight by Age",
         "height": "📏 Height by Age",
+        "bmi": "📊 BMI by Age",
         "growthCurve": "Growth curve",
         "patient": "Patient",
         "age": "Age",

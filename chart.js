@@ -1,10 +1,11 @@
 // Growth Chart SVG Generator
 
 /**
- * Create and render SVG growth chart (weight or height by age)
- * Plots WHO reference curve with patient data point highlighted
+ * Create and render SVG growth chart with z-score curves
+ * Plots WHO reference curves with z-scores (-2, -1, 0, +1, +2) and patient data point
+ * Chart type adapts based on growth stage and available data
  * @async
- * @param {string} metric - Chart metric: 'weight' or 'height'
+ * @param {string} metric - Chart metric: 'weight', 'height', or 'bmi'
  * @param {string} gender - Patient gender: 'BOY' or 'GIRL'
  * @param {Object} patientData - Patient assessment data
  * @param {number} patientData.age - Patient age value
@@ -17,12 +18,41 @@ async function renderGrowthChart(metric, gender, patientData) {
   const svg = document.getElementById("chartSvg");
   svg.innerHTML = ""; // Clear previous chart
 
-  // Get data filtered by gender
+  // Load z-score data
+  await loadZScoreData();
+
+  // Determine growth stage
+  const growthStage = determineGrowthStage(
+    patientData.age,
+    patientData.ageUnit
+  );
+
+  // Get chart data and z-score curves
   const chartData = getChartDataForGender(gender);
   if (!chartData || chartData.length === 0) {
     svg.innerHTML =
       '<text x="50%" y="50%" text-anchor="middle">No data available</text>';
     return;
+  }
+
+  // Filter chart data to age range of growth stage
+  const ageRangeConfig = zScoreData?.strategy?.[growthStage]?.ageRange;
+  let filteredChartData = chartData;
+
+  if (ageRangeConfig) {
+    const minAgeMonths = convertToMonths(
+      ageRangeConfig.min,
+      ageRangeConfig.unit
+    );
+    const maxAgeMonths = convertToMonths(
+      ageRangeConfig.max,
+      ageRangeConfig.unit
+    );
+
+    filteredChartData = chartData.filter((d) => {
+      const ageMonths = convertToMonths(d.age, d.ageUnit);
+      return ageMonths >= minAgeMonths && ageMonths <= maxAgeMonths;
+    });
   }
 
   // Chart dimensions
@@ -37,15 +67,37 @@ async function renderGrowthChart(metric, gender, patientData) {
   svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
 
   // Extract age and metric values
-  const ages = chartData.map((d) => d.normalizedAge);
-  const values = chartData.map((d) =>
-    metric === "weight" ? d.weight : d.height
-  );
+  const ages = filteredChartData.map((d) => d.normalizedAge);
+  const metricKey = growthStage === "adolescent" ? "bmi" : metric;
+  const values = filteredChartData.map((d) => {
+    if (metricKey === "bmi" && d.weight && d.height) {
+      return calculateBMI(d.weight, d.height);
+    }
+    return metricKey === "weight" ? d.weight : d.height;
+  });
+
+  // Collect all z-score values to include in scaling
+  let allValues = [...values];
+  for (let i = 0; i < filteredChartData.length; i++) {
+    const dataPoint = filteredChartData[i];
+    const zScoreCurves = getZScoreCurves(
+      dataPoint.gender ||
+        (currentPatientData ? currentPatientData.gender : "BOY"),
+      dataPoint.age,
+      dataPoint.ageUnit,
+      metricKey
+    );
+    for (const [zScore, curveValue] of Object.entries(zScoreCurves)) {
+      if (curveValue !== undefined && curveValue !== null) {
+        allValues.push(curveValue);
+      }
+    }
+  }
 
   const minAge = Math.min(...ages);
   const maxAge = Math.max(...ages);
-  const minValue = Math.min(...values);
-  const maxValue = Math.max(...values);
+  const minValue = Math.min(...allValues);
+  const maxValue = Math.max(...allValues);
 
   // Add 10% padding to ranges
   const ageRange = maxAge - minAge || 1;
@@ -192,51 +244,89 @@ async function renderGrowthChart(metric, gender, patientData) {
   yTitle.setAttribute("font-weight", "bold");
   yTitle.setAttribute("fill", "#2c3e50");
   yTitle.setAttribute("transform", `rotate(-90 20 ${padding.top - 10})`);
-  yTitle.textContent = metric === "weight" ? "Weight (kg)" : "Height (cm)";
+
+  if (growthStage === "adolescent") {
+    yTitle.textContent = "BMI (kg/m²)";
+  } else {
+    yTitle.textContent = metricKey === "weight" ? "Weight (kg)" : "Height (cm)";
+  }
   svg.appendChild(yTitle);
 
-  // Main curve (growth data)
-  let pathData = "";
-  for (let i = 0; i < chartData.length; i++) {
-    const x = toSvgX(chartData[i].normalizedAge);
-    const y = toSvgY(
-      metric === "weight" ? chartData[i].weight : chartData[i].height
-    );
-    pathData += (i === 0 ? "M" : "L") + x + " " + y;
-  }
+  // Plot z-score curves with colors: -2 (black), -1 (red), 0 (green), +1 (red), +2 (black)
+  const zScoreColors = {
+    "-2": "#000000",
+    "-1": "#dc3545",
+    0: "#28a745",
+    1: "#dc3545",
+    2: "#000000",
+  };
 
-  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute("d", pathData);
-  path.setAttribute("stroke", "#2c3e50");
-  path.setAttribute("stroke-width", "2");
-  path.setAttribute("fill", "none");
-  path.setAttribute("stroke-linecap", "round");
-  path.setAttribute("stroke-linejoin", "round");
-  svg.appendChild(path);
+  // Plot all z-score curves across all ages
+  for (const [zScore, color] of Object.entries(zScoreColors)) {
+    let pathData = "";
 
-  // Plot all data points
-  for (const point of chartData) {
-    const x = toSvgX(point.normalizedAge);
-    const y = toSvgY(metric === "weight" ? point.weight : point.height);
+    for (let i = 0; i < filteredChartData.length; i++) {
+      const dataPoint = filteredChartData[i];
+      const x = toSvgX(dataPoint.normalizedAge);
 
-    const circle = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "circle"
-    );
-    circle.setAttribute("cx", x);
-    circle.setAttribute("cy", y);
-    circle.setAttribute("r", "2");
-    circle.setAttribute("fill", "#2c3e50");
-    circle.setAttribute("opacity", "0.3");
-    svg.appendChild(circle);
+      // Get z-score curves for this specific age
+      const zScoreCurves = getZScoreCurves(
+        gender,
+        dataPoint.age,
+        dataPoint.ageUnit,
+        metricKey
+      );
+      const curveValue = zScoreCurves[zScore];
+
+      if (curveValue === undefined || curveValue === null) continue;
+
+      let y;
+      if (growthStage === "adolescent") {
+        // For adolescents, the z-score value IS the BMI value
+        y = toSvgY(curveValue);
+      } else {
+        // For infant/child, the z-score value IS the weight/height value
+        y = toSvgY(curveValue);
+      }
+
+      pathData += (pathData === "" ? "M" : "L") + x + " " + y;
+    }
+
+    if (pathData) {
+      const path = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
+      path.setAttribute("d", pathData);
+      path.setAttribute("stroke", color);
+      path.setAttribute("stroke-width", zScore === "0" ? "3" : "2");
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke-linecap", "round");
+      path.setAttribute("stroke-linejoin", "round");
+      path.setAttribute("opacity", zScore === "0" ? "1" : "0.7");
+      svg.appendChild(path);
+    }
   }
 
   // Patient point
   if (patientData) {
     const patientAgeYears =
       convertToMonths(patientData.age, patientData.ageUnit) / 12;
-    const patientValue =
-      metric === "weight" ? patientData.weight : patientData.height;
+    let patientValue = null;
+
+    if (growthStage === "adolescent") {
+      // Calculate BMI for adolescent
+      const height =
+        patientData.height ||
+        getMedianHeightForAge(gender, patientData.age, patientData.ageUnit);
+      if (height) {
+        patientValue = calculateBMI(patientData.weight, height);
+      }
+    } else {
+      // Use weight or height for infant/child
+      patientValue =
+        metricKey === "weight" ? patientData.weight : patientData.height;
+    }
 
     // Only render patient point if the metric value is available
     if (patientValue !== null && patientValue !== undefined) {
@@ -252,8 +342,8 @@ async function renderGrowthChart(metric, gender, patientData) {
       highlight.setAttribute("cy", py);
       highlight.setAttribute("r", "8");
       highlight.setAttribute("fill", "none");
-      highlight.setAttribute("stroke", "#dc3545");
-      highlight.setAttribute("stroke-width", "2");
+      highlight.setAttribute("stroke", "#ffc107");
+      highlight.setAttribute("stroke-width", "3");
       svg.appendChild(highlight);
 
       // Patient point
@@ -263,8 +353,8 @@ async function renderGrowthChart(metric, gender, patientData) {
       );
       patientPoint.setAttribute("cx", px);
       patientPoint.setAttribute("cy", py);
-      patientPoint.setAttribute("r", "5");
-      patientPoint.setAttribute("fill", "#dc3545");
+      patientPoint.setAttribute("r", "6");
+      patientPoint.setAttribute("fill", "#ffc107");
       patientPoint.setAttribute("cursor", "pointer");
       svg.appendChild(patientPoint);
 
@@ -278,11 +368,45 @@ async function renderGrowthChart(metric, gender, patientData) {
       label.setAttribute("text-anchor", "middle");
       label.setAttribute("font-size", "12");
       label.setAttribute("font-weight", "bold");
-      label.setAttribute("fill", "#dc3545");
-      label.textContent = `${patientValue.toFixed(1)} ${
-        metric === "weight" ? "kg" : "cm"
-      }`;
+      label.setAttribute("fill", "#ffc107");
+      if (growthStage === "adolescent") {
+        label.textContent = `${patientValue.toFixed(1)} BMI`;
+      } else {
+        label.textContent = `${patientValue.toFixed(1)} ${
+          metricKey === "weight" ? "kg" : "cm"
+        }`;
+      }
       svg.appendChild(label);
     }
   }
+
+  // Legend
+  const legendX = width - 150;
+  const legendY = padding.top + 10;
+  const legendItems = [
+    { label: "z = 0 (Median)", color: "#28a745" },
+    { label: "z = ±1", color: "#dc3545" },
+    { label: "z = ±2", color: "#000000" },
+    { label: "Patient", color: "#ffc107" },
+  ];
+
+  legendItems.forEach((item, idx) => {
+    const y = legendY + idx * 20;
+
+    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", legendX);
+    rect.setAttribute("y", y - 6);
+    rect.setAttribute("width", 12);
+    rect.setAttribute("height", 12);
+    rect.setAttribute("fill", item.color);
+    svg.appendChild(rect);
+
+    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    text.setAttribute("x", legendX + 16);
+    text.setAttribute("y", y + 4);
+    text.setAttribute("font-size", "11");
+    text.setAttribute("fill", "#333");
+    text.textContent = item.label;
+    svg.appendChild(text);
+  });
 }
