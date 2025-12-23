@@ -22,7 +22,10 @@ async function renderGrowthChart(metric, gender, patientData) {
   await loadZScoreData();
 
   // Determine growth stage
-  const growthStage = determineGrowthStage(patientData.age, patientData.ageUnit);
+  const growthStage = determineGrowthStage(
+    patientData.age,
+    patientData.ageUnit
+  );
 
   // Get chart data and z-score curves
   const chartData = getChartDataForGender(gender);
@@ -77,7 +80,13 @@ async function renderGrowthChart(metric, gender, patientData) {
   let allValues = [...values];
   for (let i = 0; i < filteredChartData.length; i++) {
     const dataPoint = filteredChartData[i];
-    const zScoreCurves = getZScoreCurves(dataPoint.gender || (currentPatientData ? currentPatientData.gender : "BOY"), dataPoint.age, dataPoint.ageUnit, metricKey);
+    const zScoreCurves = getZScoreCurves(
+      dataPoint.gender ||
+        (currentPatientData ? currentPatientData.gender : "BOY"),
+      dataPoint.age,
+      dataPoint.ageUnit,
+      metricKey
+    );
     for (const [zScore, curveValue] of Object.entries(zScoreCurves)) {
       if (curveValue !== undefined && curveValue !== null) {
         allValues.push(curveValue);
@@ -247,25 +256,30 @@ async function renderGrowthChart(metric, gender, patientData) {
   const zScoreColors = {
     "-2": "#000000",
     "-1": "#dc3545",
-    "0": "#28a745",
-    "1": "#dc3545",
-    "2": "#000000",
+    0: "#28a745",
+    1: "#dc3545",
+    2: "#000000",
   };
 
   // Plot all z-score curves across all ages
   for (const [zScore, color] of Object.entries(zScoreColors)) {
     let pathData = "";
-    
+
     for (let i = 0; i < filteredChartData.length; i++) {
       const dataPoint = filteredChartData[i];
       const x = toSvgX(dataPoint.normalizedAge);
-      
+
       // Get z-score curves for this specific age
-      const zScoreCurves = getZScoreCurves(gender, dataPoint.age, dataPoint.ageUnit, metricKey);
+      const zScoreCurves = getZScoreCurves(
+        gender,
+        dataPoint.age,
+        dataPoint.ageUnit,
+        metricKey
+      );
       const curveValue = zScoreCurves[zScore];
-      
+
       if (curveValue === undefined || curveValue === null) continue;
-      
+
       let y;
       if (growthStage === "adolescent") {
         // For adolescents, the z-score value IS the BMI value
@@ -279,7 +293,10 @@ async function renderGrowthChart(metric, gender, patientData) {
     }
 
     if (pathData) {
-      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      const path = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
       path.setAttribute("d", pathData);
       path.setAttribute("stroke", color);
       path.setAttribute("stroke-width", zScore === "0" ? "3" : "2");
@@ -300,13 +317,15 @@ async function renderGrowthChart(metric, gender, patientData) {
     if (growthStage === "adolescent") {
       // Calculate BMI for adolescent
       const height =
-        patientData.height || getMedianHeightForAge(gender, patientData.age, patientData.ageUnit);
+        patientData.height ||
+        getMedianHeightForAge(gender, patientData.age, patientData.ageUnit);
       if (height) {
         patientValue = calculateBMI(patientData.weight, height);
       }
     } else {
       // Use weight or height for infant/child
-      patientValue = metricKey === "weight" ? patientData.weight : patientData.height;
+      patientValue =
+        metricKey === "weight" ? patientData.weight : patientData.height;
     }
 
     // Only render patient point if the metric value is available

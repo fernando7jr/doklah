@@ -4,7 +4,7 @@
         "subtitle": "小児成長評価"
     },
     "footer": {
-        "version": "Doklah v1.0 | オフライン小児評価"
+        "version": "Doklah v1.1 | オフライン小児評価"
     },
     "form": {
         "title": "患者評価",
@@ -46,13 +46,32 @@
         "gender": "性別",
         "weight": "体重 (kg)",
         "height": "身長 (cm)",
+        "bmi": "BMI (kg/m²)",
         "age": "年齢",
         "growthStage": "成長段階",
         "notProvided": "未提供",
         "closenessExcellent": "優れている",
         "closenessVeryGood": "非常に良い",
         "closenessGood": "良い",
-        "closenesssFair": "まあまあ"
+        "closenesssFair": "まあまあ",
+        "closenessBad": "悪い",
+        "closenessVeryBad": "非常に悪い",
+        "matchQualityPercentage": "一致品質",
+        "weightSeverelyUnderweight": "非常に低体重",
+        "weightUnderweight": "低体重",
+        "weightNormal": "正常体重",
+        "weightOverweight": "太り過ぎ",
+        "weightSeverelyOverweight": "非常に太り過ぎ",
+        "heightSeverelyShort": "非常に低身長",
+        "heightShort": "低身長",
+        "heightNormal": "正常身長",
+        "heightTall": "高身長",
+        "heightSeverelyTall": "非常に高身長",
+        "bmiSeverelyUnderweight": "非常に低体重",
+        "bmiUnderweight": "低体重",
+        "bmiNormal": "正常体重",
+        "bmiOverweight": "太り過ぎ",
+        "bmiSeverelyOverweight": "非常に太り過ぎ"
     },
     "buttons": {
         "back": "← 戻る",

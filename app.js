@@ -119,11 +119,7 @@ async function initApp() {
 
     document.getElementById("bmiChart").addEventListener("change", () => {
       if (currentPatientData) {
-        renderGrowthChart(
-          "bmi",
-          currentPatientData.gender,
-          currentPatientData
-        );
+        renderGrowthChart("bmi", currentPatientData.gender, currentPatientData);
       }
     });
   } catch (error) {
@@ -226,39 +222,161 @@ function handleFormSubmit(e) {
  * @param {number} result.closeness - Closeness percentage (0-100)
  * @returns {void}
  */
-function displayResults(result) {
+async function displayResults(result) {
   // Hide empty state and show results
   emptyState.style.display = "none";
   resultsContainer.style.display = "block";
 
+  // Load z-score data if needed
+  await loadZScoreData();
+
+  const growthStage = determineGrowthStage(
+    result.input.age.value,
+    result.input.age.unit
+  );
+
+  // Calculate z-scores for input weight and height
+  const weightZScore = interpolateZScore(
+    result.input.gender === "Boy" ? "BOY" : "GIRL",
+    result.input.age.value,
+    result.input.age.unit,
+    "weight",
+    result.input.weight
+  );
+
+  let heightZScore = null;
+  let heightPercentage = 0;
+  if (result.input.height) {
+    heightZScore = interpolateZScore(
+      result.input.gender === "Boy" ? "BOY" : "GIRL",
+      result.input.age.value,
+      result.input.age.unit,
+      "height",
+      result.input.height
+    );
+    heightPercentage = calculatePercentageFromZScore(heightZScore);
+  } else if (growthStage !== "adolescent") {
+    // Use median height for comparison if not provided
+    const ageMatchedRecord = findMatchByAge(
+      result.input.gender === "Boy" ? "BOY" : "GIRL",
+      result.input.age.value,
+      result.input.age.unit
+    );
+    heightZScore = 0; // Assume median if using default
+    heightPercentage = 100;
+  }
+
+  const weightPercentage = calculatePercentageFromZScore(weightZScore);
+
+  // For adolescents, use BMI instead of weight/height
+  let bmiZScore = null;
+  let bmiPercentage = 0;
+  if (growthStage === "adolescent") {
+    const height =
+      result.input.height ||
+      getMedianHeightForAge(
+        result.input.gender === "Boy" ? "BOY" : "GIRL",
+        result.input.age.value,
+        result.input.age.unit
+      );
+    if (height) {
+      const bmi = calculateBMI(result.input.weight, height);
+      bmiZScore = interpolateZScore(
+        result.input.gender === "Boy" ? "BOY" : "GIRL",
+        result.input.age.value,
+        result.input.age.unit,
+        "bmi",
+        bmi
+      );
+      bmiPercentage = calculatePercentageFromZScore(bmiZScore);
+    }
+  }
+
+  // Calculate overall match quality
+  let overallPercentage;
+  if (growthStage === "adolescent") {
+    overallPercentage = bmiPercentage;
+  } else {
+    overallPercentage = result.input.height
+      ? Math.round((weightPercentage + heightPercentage) / 2)
+      : weightPercentage;
+  }
+
+  // Set closeness label based on percentage
+  let translatedLabel;
+  if (overallPercentage >= 90) {
+    translatedLabel = t("results.closenessExcellent");
+  } else if (overallPercentage >= 80) {
+    translatedLabel = t("results.closenessVeryGood");
+  } else if (overallPercentage >= 70) {
+    translatedLabel = t("results.closenessGood");
+  } else if (overallPercentage >= 50) {
+    translatedLabel = t("results.closenesssFair");
+  } else if (overallPercentage >= 30) {
+    translatedLabel = t("results.closenessBad");
+  } else {
+    translatedLabel = t("results.closenessVeryBad");
+  }
+
   // Update closeness indicator
-  const closenessPercent = result.closeness;
   document.getElementById(
     "closenessPercentage"
-  ).textContent = `${closenessPercent}% match quality`;
+  ).textContent = `${overallPercentage}% ${t(
+    "results.matchQualityPercentage"
+  )}`;
 
-  // Set closeness label with translation
-  let translatedLabel;
-  if (closenessPercent >= 90) {
-    translatedLabel = t("results.closenessExcellent");
-  } else if (closenessPercent >= 75) {
-    translatedLabel = t("results.closenessVeryGood");
-  } else if (closenessPercent >= 60) {
-    translatedLabel = t("results.closenessGood");
+  // Set classification badges
+  const weightBadge = document.getElementById("weightClassificationBadge");
+  const heightBadge = document.getElementById("heightClassificationBadge");
+  const overallBadge = document.getElementById("overallClassificationBadge");
+
+  if (growthStage === "adolescent" && bmiZScore !== null) {
+    // For adolescents, only show BMI classification
+    const bmiLabel = getZScoreLabel("bmi", bmiZScore);
+    const bmiColor = getZScoreBadgeColor(bmiZScore);
+    weightBadge.textContent = bmiLabel;
+    weightBadge.className = "badge " + bmiColor;
+    heightBadge.style.display = "none";
   } else {
-    translatedLabel = t("results.closenesssFair");
+    // For infants/children, show weight and height
+    if (weightZScore !== null) {
+      const weightLabel = getZScoreLabel("weight", weightZScore);
+      const weightColor = getZScoreBadgeColor(weightZScore);
+      weightBadge.textContent = weightLabel;
+      weightBadge.className = "badge " + weightColor;
+    }
+    if (result.input.height && heightZScore !== null) {
+      const heightLabel = getZScoreLabel("height", heightZScore);
+      const heightColor = getZScoreBadgeColor(heightZScore);
+      heightBadge.textContent = heightLabel;
+      heightBadge.className = "badge " + heightColor;
+      heightBadge.style.display = "inline-block";
+    } else {
+      heightBadge.style.display = "none";
+    }
   }
-  document.getElementById("closenessLabel").textContent = translatedLabel;
 
-  // Update closeness bar color based on percentage
+  // Set overall match quality badge
+  overallBadge.textContent = translatedLabel;
+  if (overallPercentage >= 80) {
+    overallBadge.className = "badge bg-success";
+  } else if (overallPercentage >= 70) {
+    overallBadge.className = "badge bg-info";
+  } else if (overallPercentage >= 50) {
+    overallBadge.className = "badge bg-warning";
+  } else {
+    overallBadge.className = "badge bg-danger";
+  }
+
+  // Update closeness bar color
   const barEl = document.getElementById("closenessBar");
-  barEl.style.width = closenessPercent + "%";
+  barEl.style.width = overallPercentage + "%";
 
-  if (closenessPercent >= 75) {
+  if (overallPercentage >= 80) {
     barEl.className = "progress-bar bg-success";
-  } else if (closenessPercent >= 60) {
+  } else if (overallPercentage >= 70) {
     barEl.className = "progress-bar bg-info";
-  } else if (closenessPercent >= 40) {
+  } else if (overallPercentage >= 50) {
     barEl.className = "progress-bar bg-warning";
   } else {
     barEl.className = "progress-bar bg-danger";
@@ -273,15 +391,14 @@ function displayResults(result) {
     document.getElementById("resultInputHeight").textContent =
       result.input.height.toFixed(1) + " cm";
   } else {
-    document.getElementById("resultInputHeight").textContent = "Not provided";
+    document.getElementById("resultInputHeight").textContent = t(
+      "results.notProvided"
+    );
   }
   const ageDisplay = formatAge(result.input.age.value, result.input.age.unit);
   document.getElementById("resultInputAge").textContent = ageDisplay;
-  const inputStage = calculateGrowthStage(
-    result.input.age.value,
-    result.input.age.unit
-  );
-  document.getElementById("resultInputStage").textContent = inputStage;
+  document.getElementById("resultInputStage").textContent =
+    growthStage.charAt(0).toUpperCase() + growthStage.slice(1);
 
   // Update age-matched values
   document.getElementById("resultAgeMatchGender").textContent =
@@ -295,7 +412,7 @@ function displayResults(result) {
   document.getElementById("resultAgeMatchStage").textContent =
     result.ageMatched.ageType;
 
-  // Update weight-matched values
+  // Update weight-matched (closest match) values
   document.getElementById("resultWeightMatchGender").textContent =
     result.weightMatched.gender;
   document.getElementById("resultWeightMatchWeight").textContent =
@@ -307,10 +424,98 @@ function displayResults(result) {
   document.getElementById("resultWeightMatchStage").textContent =
     result.weightMatched.ageType;
 
+  // Handle BMI row for adolescents
+  const bmiRow = document.getElementById("bmiRow");
+  if (growthStage === "adolescent") {
+    bmiRow.style.display = "table-row";
+
+    // Input BMI
+    const inputHeight =
+      result.input.height ||
+      getMedianHeightForAge(
+        result.input.gender === "Boy" ? "BOY" : "GIRL",
+        result.input.age.value,
+        result.input.age.unit
+      );
+    if (inputHeight) {
+      const inputBmi = calculateBMI(result.input.weight, inputHeight);
+      document.getElementById("resultInputBmi").textContent =
+        inputBmi.toFixed(1) + " kg/m²";
+    }
+
+    // Matched age BMI (median)
+    const matchedHeight = result.ageMatched.height;
+    if (matchedHeight) {
+      const matchedBmi = calculateBMI(result.ageMatched.weight, matchedHeight);
+      document.getElementById("resultAgeMatchBmi").textContent =
+        matchedBmi.toFixed(1) + " kg/m²";
+    }
+
+    // Weight-matched (closest match) BMI
+    const weightMatchedHeight = result.weightMatched.height;
+    if (weightMatchedHeight) {
+      const weightMatchedBmi = calculateBMI(result.weightMatched.weight, weightMatchedHeight);
+      document.getElementById("resultWeightMatchBmi").textContent =
+        weightMatchedBmi.toFixed(1) + " kg/m²";
+    }
+  } else {
+    bmiRow.style.display = "none";
+  }
+
   // Show results and scroll into view
   resultsContainer.style.display = "block";
   emptyState.style.display = "none";
   resultsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/**
+ * Get translated z-score classification label
+ * @param {string} metric - 'weight', 'height', or 'bmi'
+ * @param {number} zScore - The z-score value
+ * @returns {string} Translated classification label
+ */
+function getZScoreLabel(metric, zScore) {
+  let labelKey;
+
+  if (metric === "weight") {
+    if (zScore < -2) {
+      labelKey = "weightSeverelyUnderweight";
+    } else if (zScore < -1) {
+      labelKey = "weightUnderweight";
+    } else if (zScore < 1) {
+      labelKey = "weightNormal";
+    } else if (zScore < 2) {
+      labelKey = "weightOverweight";
+    } else {
+      labelKey = "weightSeverelyOverweight";
+    }
+  } else if (metric === "height") {
+    if (zScore < -2) {
+      labelKey = "heightSeverelyShort";
+    } else if (zScore < -1) {
+      labelKey = "heightShort";
+    } else if (zScore < 1) {
+      labelKey = "heightNormal";
+    } else if (zScore < 2) {
+      labelKey = "heightTall";
+    } else {
+      labelKey = "heightSeverelyTall";
+    }
+  } else if (metric === "bmi") {
+    if (zScore < -2) {
+      labelKey = "bmiSeverelyUnderweight";
+    } else if (zScore < -1) {
+      labelKey = "bmiUnderweight";
+    } else if (zScore < 1) {
+      labelKey = "bmiNormal";
+    } else if (zScore < 2) {
+      labelKey = "bmiOverweight";
+    } else {
+      labelKey = "bmiSeverelyOverweight";
+    }
+  }
+
+  return t(`results.${labelKey}`);
 }
 
 /**
@@ -373,7 +578,10 @@ function handleChartButton() {
   if (!currentPatientData) return;
 
   // Determine growth stage
-  const growthStage = determineGrowthStage(currentPatientData.age, currentPatientData.ageUnit);
+  const growthStage = determineGrowthStage(
+    currentPatientData.age,
+    currentPatientData.ageUnit
+  );
   const weightChart = document.getElementById("weightChart");
   const heightChart = document.getElementById("heightChart");
   const bmiChart = document.getElementById("bmiChart");

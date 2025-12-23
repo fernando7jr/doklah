@@ -4,7 +4,7 @@
         "subtitle": "Avaliação do Crescimento Pediátrico"
     },
     "footer": {
-        "version": "Doklah v1.0 | Avaliação Pediátrica Offline-First"
+        "version": "Doklah v1.1 | Avaliação Pediátrica Offline-First"
     },
     "form": {
         "title": "Avaliação do Paciente",
@@ -46,13 +46,32 @@
         "gender": "Gênero",
         "weight": "Peso (kg)",
         "height": "Altura (cm)",
+        "bmi": "IMC (kg/m²)",
         "age": "Idade",
         "growthStage": "Estágio de Crescimento",
         "notProvided": "Não fornecido",
         "closenessExcellent": "Excelente",
         "closenessVeryGood": "Muito Bom",
         "closenessGood": "Bom",
-        "closenesssFair": "Aceitável"
+        "closenesssFair": "Aceitável",
+        "closenessBad": "Ruim",
+        "closenessVeryBad": "Muito Ruim",
+        "matchQualityPercentage": "qualidade de correspondência",
+        "weightSeverelyUnderweight": "Severamente Abaixo do Peso",
+        "weightUnderweight": "Abaixo do Peso",
+        "weightNormal": "Peso Normal",
+        "weightOverweight": "Sobrepeso",
+        "weightSeverelyOverweight": "Severamente Acima do Peso",
+        "heightSeverelyShort": "Severamente Baixo",
+        "heightShort": "Baixo",
+        "heightNormal": "Altura Normal",
+        "heightTall": "Alto",
+        "heightSeverelyTall": "Muito Alto",
+        "bmiSeverelyUnderweight": "Severamente Abaixo do Peso",
+        "bmiUnderweight": "Abaixo do Peso",
+        "bmiNormal": "Peso Normal",
+        "bmiOverweight": "Sobrepeso",
+        "bmiSeverelyOverweight": "Obesidade"
     },
     "buttons": {
         "back": "← Voltar",
